@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: startP94
+Implementation-Version: 1.0-SNAPSHOT
+Built-By: ryusui_kuzuo
+Implementation-Vendor-Id: newgroup
+Build-Jdk: 1.8.0_92
+Implementation-URL: http://projects.spring.io/spring-boot/P258MySQLLog
+ backSecurity/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+
