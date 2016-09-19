@@ -1,3 +1,5 @@
+//dataの処理は、controller空呼ばれたこのripositoryが処理をする
+
 package newgroup.repository;
 
 import java.util.List;
@@ -5,15 +7,15 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import entity.MyData;
+import newgroup.entity.MyDataEntity;
 
 @Repository
-public interface MyDataRepository  extends JpaRepository<MyData, Long> {
-	
-	public MyData findById(Long name);
-	public List<MyData> findByNameLike(String name);
-	public List<MyData> findByIdIsNotNullOrderByIdDesc();
-	public List<MyData> findByAgeGreaterThan(Integer age);
-	public List<MyData> findByAgeBetween(Integer age1, Integer age2);
+public interface MyDataRepository  extends JpaRepository<MyDataEntity, Long> {
+
+	public MyDataEntity findById(long name);
+	public List<MyDataEntity> findByNameLike(String name);
+	public List<MyDataEntity> findByIdIsNotNullOrderByIdDesc();
+	public List<MyDataEntity> findByAgeGreaterThan(Integer age);
+	public List<MyDataEntity> findByAgeBetween(Integer age1, Integer age2);
 
 }

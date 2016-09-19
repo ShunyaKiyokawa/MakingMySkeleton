@@ -1,4 +1,7 @@
-package entity;
+//entitypackageはcontrollerより下の階層に配置すること。上の階層に置くとJuniterror当たりが出てきて動かない。
+//データベースのエンティティを格納
+
+package newgroup.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -13,11 +18,15 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import lombok.Data;
 import phoneVaridation.Phone;
 
-@Entity //JPAの管理化にエンティティクラスとしておかれる
+//JPAの管理化にエンティティクラスとしておかれる
+//よくわからんけどentityパッケージ配下に移動するとJUnitでBeansの名前が創れずコケる。
+@Data
+@Entity
 @Table(name = "mydata")
-public class MyData {
+public class MyDataEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO) //値は自動生成
@@ -29,6 +38,11 @@ public class MyData {
 	@Column(length = 50, nullable = false)
 	@NotEmpty
 	private String name;
+
+	@Column(nullable = false)
+	@DecimalMin(value="5")
+	@DecimalMax(value="16")
+	private String password;
 
 	@Column(length = 200, nullable = true)
 	@Email
