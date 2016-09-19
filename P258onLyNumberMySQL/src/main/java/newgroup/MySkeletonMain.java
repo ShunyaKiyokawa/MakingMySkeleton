@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StartP94Application {
+public class MySkeletonMain {
 
 	public static void main(String[] args) {
-		SpringApplication.run(StartP94Application.class, args);
+		SpringApplication.run(MySkeletonMain.class, args);
 	}
 }
