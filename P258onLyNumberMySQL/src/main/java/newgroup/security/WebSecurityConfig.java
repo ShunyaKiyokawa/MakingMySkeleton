@@ -45,6 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth
 			.inMemoryAuthentication()
 				.withUser("admin").password("password").roles("ADMIN");
+				//.withUser("admin").password("password").roles("ADMIN", "CREATEUSER); //複数できそう？
         //scope globalでmemory保存
     }
 }
