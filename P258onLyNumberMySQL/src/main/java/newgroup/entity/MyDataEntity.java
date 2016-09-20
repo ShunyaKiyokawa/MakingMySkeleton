@@ -25,7 +25,7 @@ import phoneVaridation.Phone;
 @Data
 @Entity
 @Table(name = "mydata")
-public class MyDataEntity {
+public class MyDataEntity{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO) //値は自動生成
@@ -67,6 +67,13 @@ public class MyDataEntity {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getMail() {

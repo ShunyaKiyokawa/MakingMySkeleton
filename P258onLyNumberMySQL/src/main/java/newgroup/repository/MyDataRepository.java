@@ -12,7 +12,12 @@ import newgroup.entity.MyDataEntity;
 @Repository
 public interface MyDataRepository  extends JpaRepository<MyDataEntity, Long> {
 
-	public MyDataEntity findById(long name);
+	public static MyDataEntity findByName(String name) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+	public MyDataEntity findById(long id);
+	public MyDataEntity findByPassword(String password);
 	public List<MyDataEntity> findByNameLike(String name);
 	public List<MyDataEntity> findByIdIsNotNullOrderByIdDesc();
 	public List<MyDataEntity> findByAgeGreaterThan(Integer age);
