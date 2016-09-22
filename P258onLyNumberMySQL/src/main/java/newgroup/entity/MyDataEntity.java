@@ -55,6 +55,10 @@ public class MyDataEntity {
 	@Phone(onlyNumber=true)
 	private String memo;
 
+	@Column(nullable = false)
+	@NotEmpty
+	private String role;
+
 	public long getId() {
 		return id;
 	}
@@ -88,5 +92,12 @@ public class MyDataEntity {
 	}
 	public void setMemo(String memo) {
 		this.memo = memo;
+	}
+
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 }

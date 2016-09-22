@@ -55,6 +55,12 @@
 		th:errorclass="err" cols="20" rows="5" ></textarea>
 	<div th:if="${#fields.hasErrors('memo')}"
 		th:errors="*{memo}" th:errorclass="err"></div></td></tr>
+				<tr><td><label for="role">ロール</label></td>
+			<td><input type="text" name="role"
+				th:value="*{role}" th:errorclass="err" />
+			<div th:if="${#fields.hasErrors('role')}"
+				th:errors="*{role}" th:errorclass="err">
+				</div></td></tr>
 		<tr><td></td><td><input type="submit" /></td></tr>
 	</form>
 	</table>
