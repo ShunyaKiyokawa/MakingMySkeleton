@@ -30,6 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                // .antMatchers("/adminspage/**").hasRole("ADMIN")
                 //.hasRole("USER") // USER 権限のみアクセス可 認可
                 //.permitAll()は全ユーザーアクセス可
+                //なお、html側ではROLE_を付ける必要がある。このページでROLE_ADMINと指定すると、ROLE_が自動でつけられるので邪魔というエラーが出る
                 .anyRequest().authenticated() //リクエストあるとここにリダイレクト
                 .and()
             .formLogin()
@@ -40,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .logout()
                 .permitAll();
     }
-//@ModelAttribute MyDataEntity mydata
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
@@ -49,6 +50,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .authoritiesByUsernameQuery("select name as username, role as authority from mydata where name = ?")
             .usersByUsernameQuery("select name as username, password as password, true as enabled from mydata where name = ?")
             ;
+        /*application.propertiesで指定されたdataSourceのデータベースにアクセスした後、mydataテーブルのnameを参照し、
+          パスワードを比較している。asで置き換えてるのはspringSecurityが求める形に合わせるため*/
 /*        auth
             .inMemoryAuthentication()
                 .withUser("user").password("password").roles("USER");*/

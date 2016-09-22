@@ -18,8 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 import newgroup.entity.MyDataEntity;
 import newgroup.repository.MyDataRepository;
 
+
 @Controller
 public class MySkeletonController {
+	final String ROLE_ADMIN = "ROLE_ADMIN";
 
 	@Autowired
 	MyDataRepository repository;
@@ -30,6 +32,8 @@ public class MySkeletonController {
 			ModelAndView mav) {
 		mav.setViewName("index");
 		mav.addObject("msg","this is sample content.");
+		mav.addObject("role_admin","ROLE_ADMIN"); //管理者権限のロールを指定する
+		mav.addObject("role_user","ROLE_USER"); //一般ユーザーロールを指定する。このページで作成するのは一般ユーザー
 		mav.addObject("formModel",mydata);
 		Iterable<MyDataEntity> list = repository.findAll();
 		mav.addObject("datalist",list);
@@ -54,6 +58,8 @@ public class MySkeletonController {
 			mov.addObject("datalist",list);
 			res = mov;
 		}
+		mov.addObject("role_admin","ROLE_ADMIN"); //管理者権限のロールを指定する
+		mov.addObject("role_user","ROLE_USER"); //一般ユーザーロールを指定する。このページで作成するのは一般ユーザー
 		return res;
 	}
 
@@ -64,6 +70,7 @@ public class MySkeletonController {
 		mav.addObject("title","edit mydata.");
 		MyDataEntity data = repository.findById((long)id);
 		mav.addObject("formModel",data);
+		mav.addObject("role_user","ROLE_USER");
 		return mav;
 	}
 
@@ -72,6 +79,7 @@ public class MySkeletonController {
 	public ModelAndView update(@ModelAttribute MyDataEntity mydata,
 			ModelAndView mav) {
 		repository.saveAndFlush(mydata);
+		mav.addObject("role_user","ROLE_USER");
 		return new ModelAndView("redirect:/");
 	}
 
@@ -108,11 +116,44 @@ public class MySkeletonController {
 	  public String nosecurity(Model model) {
 	    return "security/nosecurity";
 	  }
-//modelはtemplateのhtml情報がないのでそのままreturnできない。returnしたかったらModelAndViewを使う
+//modelはtemplateのhtml情報がないのでそのままreturnできない。returnしたかったらModelAndViewを使う。
+//ちなみにﾘﾀｰﾝで指定しているのはhtmlのファイル構造（templatesフォルダ下から）
 	@RequestMapping(value = "/admin/index", method = RequestMethod.GET)
-	  public String adminspage(Model model) {
-	    return "adminsindex";
-	  }
+	public ModelAndView adminindex(
+		@ModelAttribute("formModel") MyDataEntity mydata,
+			ModelAndView mav) {
+		mav.setViewName("adminsindex");
+		mav.addObject("msg","this is sample content.");
+		mav.addObject("role_admin","ROLE_ADMIN"); //管理者権限のロールを指定する
+		mav.addObject("role_user","ROLE_USER"); //一般ユーザーロールを指定する。このページで作成するのは一般ユーザー
+		mav.addObject("formModel",mydata);
+		Iterable<MyDataEntity> list = repository.findAll();
+		mav.addObject("datalist",list);
+		return mav;
+	}
+	@RequestMapping(value = "/admin/index", method = RequestMethod.POST)
+	@Transactional(readOnly=false)
+	public ModelAndView adminform(
+			@ModelAttribute("formModel")
+			@Validated MyDataEntity mydata,
+			BindingResult result,
+			ModelAndView mov) {
+		ModelAndView res = null;
+		if (!result.hasErrors()){
+			repository.saveAndFlush(mydata);
+			res = new ModelAndView("redirect:/");
+		} else {
+			mov.setViewName("adminsindex");
+			mov.addObject("msg","sorry, error is occured...");
+			Iterable<MyDataEntity> list = repository.findAll();
+			mov.addObject("datalist",list);
+			res = mov;
+		}
+		mov.addObject("role_admin","ROLE_ADMIN"); //管理者権限のロールを指定する
+		mov.addObject("role_user","ROLE_USER"); //一般ユーザーロールを指定する。このページで作成するのは一般ユーザー
+		return res;
+	}
+
 	/*
 	@PostConstruct
 	//初期化（コンストラクト）を行う。mysqlに追加され続けて邪魔なので削除。メモリにデータを保存するタイプならコメントアウトははずすべき
