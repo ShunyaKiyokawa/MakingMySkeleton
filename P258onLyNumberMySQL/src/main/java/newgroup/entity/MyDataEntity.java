@@ -9,11 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -40,8 +39,7 @@ public class MyDataEntity {
 	private String name;
 
 	@Column(nullable = false)
-	@DecimalMin(value="5")
-	@DecimalMax(value="16")
+	@Size(min=5, max=16) //文字数5文字以上最大16文字
 	private String password;
 
 	@Column(length = 200, nullable = true)
@@ -56,6 +54,10 @@ public class MyDataEntity {
 	@Column(nullable = true)
 	@Phone(onlyNumber=true)
 	private String memo;
+
+	@Column(nullable = false)
+	@NotEmpty
+	private String role;
 
 	public long getId() {
 		return id;
@@ -90,5 +92,12 @@ public class MyDataEntity {
 	}
 	public void setMemo(String memo) {
 		this.memo = memo;
+	}
+
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 }

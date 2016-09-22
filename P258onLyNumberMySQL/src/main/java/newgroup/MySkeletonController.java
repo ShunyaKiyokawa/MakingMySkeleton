@@ -108,7 +108,7 @@ public class MySkeletonController {
 	  public String nosecurity(Model model) {
 	    return "security/nosecurity";
 	  }
-
+//modelはtemplateのhtml情報がないのでそのままreturnできない。returnしたかったらModelAndViewを使う
 	@RequestMapping(value = "/admin/index", method = RequestMethod.GET)
 	  public String adminspage(Model model) {
 	    return "adminsindex";

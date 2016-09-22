@@ -17,7 +17,7 @@ import javax.validation.ReportAsSingleViolation;
 @ReportAsSingleViolation
 public @interface Phone {
 
-	String message() default "please input a phone number.";
+	String message() default "please input a phone number. not String";
 
 	Class<?>[] groups() default {};
 
