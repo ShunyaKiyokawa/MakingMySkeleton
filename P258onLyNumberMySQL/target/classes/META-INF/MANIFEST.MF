@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
-Implementation-Title: startP94
-Implementation-Version: 1.0-SNAPSHOT
+Implementation-Title: MakingMySkeleton
+Implementation-Version: 0.0.1-SNAPSHOT
 Built-By: ryusui_kuzuo
 Implementation-Vendor-Id: newgroup
 Build-Jdk: 1.8.0_92

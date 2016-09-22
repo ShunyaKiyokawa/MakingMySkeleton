@@ -16,7 +16,7 @@
         </appender>
  <!-- tomcatやsystemログなどrootで一通り全部ここで管理。rootのfileで出力先指定。 -->
         <root>
-                <level value="TRACE" /> <!-- trace debug info warn error -->
+                <level value="DEBUG" /> <!-- trace debug info warn error -->
                 <appender-ref ref="STDOUT" />　<!--  コンソール出力。必要に応じてコメントアウトで出さないことも可能-->
                 <appender-ref ref="FILE" />
         </root>

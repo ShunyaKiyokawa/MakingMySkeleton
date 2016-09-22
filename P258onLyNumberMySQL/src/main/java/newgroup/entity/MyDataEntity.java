@@ -42,6 +42,10 @@ public class MyDataEntity{
 	@Size(min=5, max=16) //文字数5文字以上最大16文字
 	private String password;
 
+	@Column(nullable = false)
+	@NotEmpty
+	private String role;
+
 	@Column(length = 200, nullable = true)
 	@Email
 	private String mail;
@@ -74,6 +78,13 @@ public class MyDataEntity{
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public String getMail() {

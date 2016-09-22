@@ -7,9 +7,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = StartP94Application.class)
+@SpringApplicationConfiguration(classes = MySkeletonMain.class)
 @WebAppConfiguration
-public class StartP94ApplicationTests {
+public class MySkeletonMainTests {
 
 	@Test
 	public void contextLoads() {

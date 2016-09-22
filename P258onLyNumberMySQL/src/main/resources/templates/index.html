@@ -23,20 +23,13 @@
 	    <input type="submit"  value="admin専用ページ"/>
 	</form>
 	<table>
-	<form method="post" action="/" th:object="${formModel}">
-	<!--  CSRF対策用トークン。ないとspringのsecurityがはじく -->
-	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+		<form method="post" action="/" th:object="${formModel}">
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 		<tr><td><label for="name">名前</label></td>
 			<td><input type="text" name="name"
 				th:value="*{name}" th:errorclass="err" />
 			<div th:if="${#fields.hasErrors('name')}"
 				th:errors="*{name}" th:errorclass="err">
-				</div></td></tr>
-		<tr><td><label for="password">password</label></td>
-			<td><input type="text" name="password"
-				th:value="*{password}" th:errorclass="err" />
-			<div th:if="${#fields.hasErrors('password')}"
-				th:errors="*{password}" th:errorclass="err">
 				</div></td></tr>
 		<tr><td><label for="age">年齢</label></td>
 			<td><input type="text" name="age"

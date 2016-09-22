@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>edit page</title>
-	<meta http-equiv="Content-Type" 
+	<meta http-equiv="Content-Type"
 		content="text/html; charset=UTF-8" />
 	<style>
 	h1 { font-size:18pt; font-weight:bold; color:gray; }
@@ -13,10 +13,12 @@
 <body>
 	<h1 th:text="${title}">Edit page</h1>
 	<table>
-	<form method="post" action="/delete" 
+	<form method="post" action="/delete"
 		th:object="${formModel}">
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 		<input type="hidden" name="id" th:value="*{id}" />
 		<tr><td><p th:text="|名前：　*{name}|"></p></td></tr>
+		<tr><td><p th:text="|Password：　*{password}|"></p></td></tr>
 		<tr><td><p th:text="|年齢：　*{age}|" ></p></td></tr>
 		<tr><td><p th:text="*{mail}"></p></td></tr>
 		<tr><td><p th:text="*{memo}"></p></td></tr>
