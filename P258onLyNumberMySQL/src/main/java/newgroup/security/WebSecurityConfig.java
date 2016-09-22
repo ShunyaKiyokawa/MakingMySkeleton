@@ -3,6 +3,8 @@
 
 package newgroup.security;
 
+import javax.sql.DataSource;
+
 //ここで認証認可の設定をする
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 @Order(1)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	@Autowired
+	private DataSource dataSource;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -40,8 +44,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
+        .jdbcAuthentication()
+            .dataSource(dataSource)
+            .authoritiesByUsernameQuery("select name as username, role as authority from mydata where name = ?")
+            .usersByUsernameQuery("select name as username, password as password, true as enabled from mydata where name = ?")
+            ;
+/*        auth
             .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");
+                .withUser("user").password("password").roles("USER");*/
 		auth
 			.inMemoryAuthentication()
 				.withUser("admin").password("password").roles("ADMIN");
