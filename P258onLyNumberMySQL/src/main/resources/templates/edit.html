@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>edit page</title>
-	<meta http-equiv="Content-Type" 
+	<meta http-equiv="Content-Type"
 		content="text/html; charset=UTF-8" />
 	<style>
 	h1 { font-size:18pt; font-weight:bold; color:gray; }
@@ -16,15 +16,21 @@
 	<h1 th:text="${title}">Edit page</h1>
 	<table>
 	<form method="post" action="/edit" th:object="${formModel}">
+		<!--  CSRF対策用トークン。ないとspringのsecurityがはじく -->
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+		<!-- ユーザーロールをもったユーザーの作成。ロールは必ず一般ユーザー -->
+		<input type="hidden" name="role" th:value="${role_user}" />
 		<input type="hidden" name="id" th:value="*{id}" />
 		<tr><td><label for="name">名前</label></td>
 			<td><input type="text" name="name" th:value="*{name}" /></td></tr>
+		<tr><td><label for="password">パスワード</label></td>
+			<td><input type="password" name="password" th:value="*{password}" /></td></tr>
 		<tr><td><label for="age">年齢</label></td>
 			<td><input type="text" name="age"  th:value="*{age}" /></td></tr>
 		<tr><td><label for="mail">メール</label></td>
 			<td><input type="text" name="mail"  th:value="*{mail}" /></td></tr>
-		<tr><td><label for="memo">メモ</label></td>
-			<td><textarea name="memo"  th:text="*{memo}" 
+		<tr><td><label for="memo">電話番号（数字のみ、ハイフン不要）</label></td>
+			<td><textarea name="memo"  th:text="*{memo}"
 			cols="20" rows="5"></textarea></td></tr>
 		<tr><td></td><td><input type="submit" /></td></tr>
 	</form>
