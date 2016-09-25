@@ -21,7 +21,8 @@ import newgroup.repository.MyDataRepository;
 
 @Controller
 public class MySkeletonController {
-	final String ROLE_ADMIN = "ROLE_ADMIN";
+	//final String ROLE_ADMIN = "ROLE_ADMIN"; のちのち定数化した方が修正楽そう
+	public enum Authority {ROLE_USER, ROLE_ADMIN};
 
 	@Autowired
 	MyDataRepository repository;
@@ -60,6 +61,15 @@ public class MySkeletonController {
 		}
 		mov.addObject("role_admin","ROLE_ADMIN"); //管理者権限のロールを指定する
 		mov.addObject("role_user","ROLE_USER"); //一般ユーザーロールを指定する。このページで作成するのは一般ユーザー
+
+/*       // パスワードを暗号化する
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String passwordHash = encoder.encode(password.getPasswordHash());
+        // System.out.println("エンコード前:\t" + account.getPasswordHash());
+        account.setPasswordHash(passwordHash);
+        // System.out.println("エンコード後:\t" + account.getPasswordHash());
+        accountService.saveAccount(account);*/
+
 		return res;
 	}
 
@@ -154,28 +164,19 @@ public class MySkeletonController {
 		return res;
 	}
 
-	/*
+/*
 	@PostConstruct
-	//初期化（コンストラクト）を行う。mysqlに追加され続けて邪魔なので削除。メモリにデータを保存するタイプならコメントアウトははずすべき
+	//初期化（コンストラクト）を行う。mysqlに追加され続けて邪魔なので削除。メモリにデータを保存するタイプならコメントアウトははずすべき。ちなみにこれ使うと現在エラーが発生中
 	public void init(){
 		MyDataEntity d1 = new MyDataEntity();
-		d1.setName("tuyano");
-		d1.setAge(123);
-		d1.setMail("syoda@tuyano.com");
+		d1.setUsername("tuyano");
+		d1.setAge(10);
+		d1.setRole("ROLE_ADMIN");
+		d1.setPassword("password");
+		d1.setMail("ore@oreeore");
 		d1.setMemo("090999999");
 		repository.saveAndFlush(d1);
-		MyDataEntity d2 = new MyDataEntity();
-		d2.setName("hanako");
-		d2.setAge(15);
-		d2.setMail("hanako@flower");
-		d2.setMemo("080888888");
-		repository.saveAndFlush(d2);
-		MyDataEntity d3 = new MyDataEntity();
-		d3.setName("sachiko");
-		d3.setAge(37);
-		d3.setMail("sachico@happy");
-		d3.setMemo("070777777");
-		repository.saveAndFlush(d3);
+
 	}*/
 
 

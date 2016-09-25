@@ -3,6 +3,10 @@
 
 package newgroup.entity;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,16 +20,39 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import phoneVaridation.Phone;
 
 //JPAの管理化にエンティティクラスとしておかれる
-//よくわからんけどentityパッケージ配下に移動するとJUnitでBeansの名前が創れずコケる。
+
 @Data
 @Entity
 @Table(name = "mydata")
-public class MyDataEntity {
+public class MyDataEntity  implements UserDetails{
+	//public enum Authority {ROLE_USER, ROLE_ADMIN};
+
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+	/*	@Bean
+	public Filter characterEncodingFilter() {
+	    CharacterEncodingFilter filter = new CharacterEncodingFilter();
+	    filter.setEncoding("UTF-8");
+	    filter.setForceEncoding(true);
+	    return filter;
+	    // //文字コード指定。データベースはshiftjisで受け取っているが。。。
+	}*/
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO) //値は自動生成
@@ -36,8 +63,9 @@ public class MyDataEntity {
 
 	@Column(length = 50, nullable = false)
 	@NotEmpty
-	private String name;
+	private String username; //ちなみにUserDetailsがusernameを要求するので、この値は変えられない
 
+	@JsonIgnore
 	@Column(nullable = false)
 	@Size(min=5, max=16) //文字数5文字以上最大16文字
 	private String password;
@@ -66,11 +94,12 @@ public class MyDataEntity {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return username;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getMail() {
@@ -100,4 +129,36 @@ public class MyDataEntity {
 	public void setRole(String role) {
 		this.role = role;
 	}
+
+	@Override
+	  public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		authorities.add(new SimpleGrantedAuthority(role.toString()));
+		return authorities;
+	}
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO 自動生成されたメソッド・スタブ
+		//defaultがfalseだがユーザーがロックされているエラーが出たのでひとまずtrueにする
+		return true;
+	}
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO 自動生成されたメソッド・スタブ
+		//defaultがfalseだがユーザーがロックされているエラーが出たのでひとまずtrueにする
+		return true;
+	}
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO 自動生成されたメソッド・スタブ
+		//defaultがfalseだがユーザーがロックされているエラーが出たのでひとまずtrueにする
+		return true;
+	}
+	@Override
+	public boolean isEnabled() {
+		// TODO 自動生成されたメソッド・スタブ
+		//defaultがfalseだがユーザーがロックされているエラーが出たのでひとまずtrueにする
+		return true;
+	}
+
 }
