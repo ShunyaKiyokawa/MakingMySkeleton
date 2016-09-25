@@ -3,26 +3,31 @@
 
 package newgroup.security;
 
-import javax.sql.DataSource;
-
 //ここで認証認可の設定をする
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
+import lombok.Getter;
+import lombok.Setter;
+import newgroup.UserAuthService;
 //USER Role
 @Configuration
 @EnableWebSecurity
 //@Order(1)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	@Autowired
-	private DataSource dataSource;
+/*	@Autowired
+	@Getter
+	@Setter
+	private DataSource dataSource;*/
+    @Autowired
+	@Getter
+	@Setter
+	private UserAuthService userAuthService;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -43,30 +48,39 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
     }
 
-    @Bean
-    PasswordEncoder passwordEncoder() {
-    	return new BCryptPasswordEncoder();
-    }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+    	// configureGlobalにしたら、Bad Credentialsエラーが発生したのでGlobalを外す
+    	//Service認証
+		auth.inMemoryAuthentication().withUser("admin").password("password").roles("ADMIN");
+		auth.userDetailsService(userAuthService); //サービス認証
+		//DBからっぽの時を考えてインメモリでadmin認証を1つ用意。
+     /* JDBC認証。ハッシュ化が難しい。
+      * auth
         .jdbcAuthentication()
             .dataSource(dataSource)
-            .authoritiesByUsernameQuery("select name as username, role as authority from mydata where name = ?")
-            .usersByUsernameQuery("select name as username, password as password, true as enabled from mydata where name = ?")
-           .passwordEncoder(passwordEncoder())
-            ;
-        /*application.propertiesで指定されたdataSourceのデータベースにアクセスした後、mydataテーブルのnameを参照し、
-          パスワードを比較している。asで置き換えてるのはspringSecurityが求める形に合わせるため*/
-/*        auth
+            .authoritiesByUsernameQuery("select username as username, role as authority from mydata where username = ?")
+            .usersByUsernameQuery("select username as username, password as password, true as enabled from mydata where username = ?")
+            //JDBCでの認証。nameからusernameに名前をかえてから繋がるかは確認していない
+    		;
+        application.propertiesで指定されたdataSourceのデータベースにアクセスした後、mydataテーブルのnameを参照し、
+          パスワードを比較している。asで置き換えてるのはspringSecurityが求める形に合わせるため
+        	*/
+		 /* インメモリ認証
+        		auth
+			.inMemoryAuthentication()
+				.withUser("admin").password("password").roles("ADMIN")
+        auth
             .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");*/
+                .withUser("user").password("password").roles("USER");
 		auth
 			.inMemoryAuthentication()
 				.withUser("admin").password("password").roles("ADMIN")
 				;
 				//.withUser("admin").password("password").roles("ADMIN", "CREATEUSER); //複数できそう？
         //scope globalでmemory保存
+         */
     }
+
+
 }

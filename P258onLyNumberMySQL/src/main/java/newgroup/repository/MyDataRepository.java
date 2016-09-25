@@ -12,8 +12,9 @@ import newgroup.entity.MyDataEntity;
 @Repository
 public interface MyDataRepository  extends JpaRepository<MyDataEntity, Long> {
 
-	public MyDataEntity findById(long name);
-	public List<MyDataEntity> findByNameLike(String name);
+	public MyDataEntity findByUsername(String username); //
+	public MyDataEntity findById(long username);
+	public List<MyDataEntity> findByUsernameLike(String username);
 	public List<MyDataEntity> findByIdIsNotNullOrderByIdDesc();
 	public List<MyDataEntity> findByAgeGreaterThan(Integer age);
 	public List<MyDataEntity> findByAgeBetween(Integer age1, Integer age2);

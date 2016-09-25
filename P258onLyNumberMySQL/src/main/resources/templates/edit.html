@@ -21,8 +21,8 @@
 		<!-- ユーザーロールをもったユーザーの作成。ロールは必ず一般ユーザー -->
 		<input type="hidden" name="role" th:value="${role_user}" />
 		<input type="hidden" name="id" th:value="*{id}" />
-		<tr><td><label for="name">名前</label></td>
-			<td><input type="text" name="name" th:value="*{name}" /></td></tr>
+		<tr><td><label for="username">名前</label></td>
+			<td><input type="text" name="username" th:value="*{username}" /></td></tr>
 		<tr><td><label for="password">パスワード</label></td>
 			<td><input type="password" name="password" th:value="*{password}" /></td></tr>
 		<tr><td><label for="age">年齢</label></td>

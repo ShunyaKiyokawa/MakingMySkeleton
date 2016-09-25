@@ -28,11 +28,11 @@
 		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 		<!-- ユーザーロールをもったユーザーの作成 -->
 		<input type="hidden" name="role" th:value="${role_user}" />
-		<tr><td><label for="name">名前</label></td>
-			<td><input type="text" name="name"
-				th:value="*{name}" th:errorclass="err" />
-			<div th:if="${#fields.hasErrors('name')}"
-				th:errors="*{name}" th:errorclass="err">
+		<tr><td><label for="username">名前</label></td>
+			<td><input type="text" name="username"
+				th:value="*{username}" th:errorclass="err" />
+			<div th:if="${#fields.hasErrors('username')}"
+				th:errors="*{username}" th:errorclass="err">
 				</div></td></tr>
 		<tr><td><label for="password">password</label></td>
 			<td><input type="password" name="password"
@@ -65,7 +65,7 @@
 	<tr><th>ID</th><th>名前</th></tr>
 	<tr th:each="obj : ${datalist}">
 		<td th:text="${obj.id}"></td>
-		<td th:text="${obj.name}"></td>
+		<td th:text="${obj.username}"></td>
 	</tr>
 	</table>
 </body>

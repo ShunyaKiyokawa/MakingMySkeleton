@@ -3,6 +3,10 @@
 
 package newgroup.entity;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +21,9 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -30,7 +37,8 @@ import phoneVaridation.Phone;
 @Data
 @Entity
 @Table(name = "mydata")
-public class MyDataEntity {
+public class MyDataEntity  implements UserDetails{
+	//public enum Authority {ROLE_USER, ROLE_ADMIN};
 
 	@Bean
 	PasswordEncoder passwordEncoder() {
@@ -55,7 +63,7 @@ public class MyDataEntity {
 
 	@Column(length = 50, nullable = false)
 	@NotEmpty
-	private String name;
+	private String username; //ちなみにUserDetailsがusernameを要求するので、この値は変えられない
 
 	@JsonIgnore
 	@Column(nullable = false)
@@ -86,13 +94,12 @@ public class MyDataEntity {
 		this.id = id;
 	}
 
-	public String getName() {
-		passwordEncoder();
-		return name;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getMail() {
@@ -122,4 +129,36 @@ public class MyDataEntity {
 	public void setRole(String role) {
 		this.role = role;
 	}
+
+	@Override
+	  public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		authorities.add(new SimpleGrantedAuthority(role.toString()));
+		return authorities;
+	}
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO 自動生成されたメソッド・スタブ
+		//defaultがfalseだがユーザーがロックされているエラーが出たのでひとまずtrueにする
+		return true;
+	}
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO 自動生成されたメソッド・スタブ
+		//defaultがfalseだがユーザーがロックされているエラーが出たのでひとまずtrueにする
+		return true;
+	}
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO 自動生成されたメソッド・スタブ
+		//defaultがfalseだがユーザーがロックされているエラーが出たのでひとまずtrueにする
+		return true;
+	}
+	@Override
+	public boolean isEnabled() {
+		// TODO 自動生成されたメソッド・スタブ
+		//defaultがfalseだがユーザーがロックされているエラーが出たのでひとまずtrueにする
+		return true;
+	}
+
 }
