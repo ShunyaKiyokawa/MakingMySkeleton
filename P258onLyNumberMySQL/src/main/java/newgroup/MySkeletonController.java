@@ -23,6 +23,15 @@ import newgroup.repository.MyDataRepository;
 public class MySkeletonController {
 	final String ROLE_ADMIN = "ROLE_ADMIN";
 
+/*	@Bean
+	public Filter characterEncodingFilter() {
+	    CharacterEncodingFilter filter = new CharacterEncodingFilter();
+	    filter.setEncoding("UTF-8");
+	    filter.setForceEncoding(true);
+	    return filter;
+	    // //文字コード指定。データベースはshiftjisで受け取っているが。。。
+	}*/
+
 	@Autowired
 	MyDataRepository repository;
 
@@ -60,6 +69,15 @@ public class MySkeletonController {
 		}
 		mov.addObject("role_admin","ROLE_ADMIN"); //管理者権限のロールを指定する
 		mov.addObject("role_user","ROLE_USER"); //一般ユーザーロールを指定する。このページで作成するのは一般ユーザー
+
+/*       // パスワードを暗号化する
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String passwordHash = encoder.encode(password.getPasswordHash());
+        // System.out.println("エンコード前:\t" + account.getPasswordHash());
+        account.setPasswordHash(passwordHash);
+        // System.out.println("エンコード後:\t" + account.getPasswordHash());
+        accountService.saveAccount(account);*/
+
 		return res;
 	}
 

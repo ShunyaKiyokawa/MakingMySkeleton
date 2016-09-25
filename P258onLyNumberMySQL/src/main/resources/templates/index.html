@@ -23,7 +23,7 @@
 	    <input type="submit"  value="admin専用ページ"/>
 	</form>
 	<table>
-	<form method="post" action="/" th:object="${formModel}">
+	<form method="post" action="/" th:object="${formModel}" accept-charset="UTF-8">
 		<!--  CSRF対策用トークン。ないとspringのsecurityがはじく -->
 		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 		<!-- ユーザーロールをもったユーザーの作成 -->

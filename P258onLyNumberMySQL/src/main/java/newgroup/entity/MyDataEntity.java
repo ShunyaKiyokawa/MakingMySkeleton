@@ -16,16 +16,35 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import phoneVaridation.Phone;
 
 //JPAの管理化にエンティティクラスとしておかれる
-//よくわからんけどentityパッケージ配下に移動するとJUnitでBeansの名前が創れずコケる。
+
 @Data
 @Entity
 @Table(name = "mydata")
 public class MyDataEntity {
+
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+	/*	@Bean
+	public Filter characterEncodingFilter() {
+	    CharacterEncodingFilter filter = new CharacterEncodingFilter();
+	    filter.setEncoding("UTF-8");
+	    filter.setForceEncoding(true);
+	    return filter;
+	    // //文字コード指定。データベースはshiftjisで受け取っているが。。。
+	}*/
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO) //値は自動生成
@@ -38,6 +57,7 @@ public class MyDataEntity {
 	@NotEmpty
 	private String name;
 
+	@JsonIgnore
 	@Column(nullable = false)
 	@Size(min=5, max=16) //文字数5文字以上最大16文字
 	private String password;
@@ -67,8 +87,10 @@ public class MyDataEntity {
 	}
 
 	public String getName() {
+		passwordEncoder();
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
