@@ -55,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .dataSource(dataSource)
             .authoritiesByUsernameQuery("select name as username, role as authority from mydata where name = ?")
             .usersByUsernameQuery("select name as username, password as password, true as enabled from mydata where name = ?")
-           .passwordEncoder(passwordEncoder())
+           //.passwordEncoder(passwordEncoder())
             ;
         /*application.propertiesで指定されたdataSourceのデータベースにアクセスした後、mydataテーブルのnameを参照し、
           パスワードを比較している。asで置き換えてるのはspringSecurityが求める形に合わせるため*/
