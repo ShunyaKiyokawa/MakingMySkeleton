@@ -1,7 +1,9 @@
-D:\GoogleDrive\myOriginalPrograms\SpringToolSuite\P258onLyNumberMySQL\src\main\java\newgroup\StartP94Application.java
-D:\GoogleDrive\myOriginalPrograms\SpringToolSuite\P258onLyNumberMySQL\src\main\java\newgroup\HeloController.java
-D:\GoogleDrive\myOriginalPrograms\SpringToolSuite\P258onLyNumberMySQL\src\main\java\newgroup\repository\MyDataRepository.java
-D:\GoogleDrive\myOriginalPrograms\SpringToolSuite\P258onLyNumberMySQL\src\main\java\newgroup\ErrorPages.java
-D:\GoogleDrive\myOriginalPrograms\SpringToolSuite\P258onLyNumberMySQL\src\main\java\phoneVaridation\PhoneValidator.java
-D:\GoogleDrive\myOriginalPrograms\SpringToolSuite\P258onLyNumberMySQL\src\main\java\phoneVaridation\Phone.java
-D:\GoogleDrive\myOriginalPrograms\SpringToolSuite\P258onLyNumberMySQL\src\main\java\entity\MyData.java
+D:\LocalEclipseNeonWorkspace\MakingMySkeleton\P258MySQLSecurity\MakingMySkeleton\P258onLyNumberMySQL\src\main\java\newgroup\repository\MyDataRepository.java
+D:\LocalEclipseNeonWorkspace\MakingMySkeleton\P258MySQLSecurity\MakingMySkeleton\P258onLyNumberMySQL\src\main\java\newgroup\ErrorPages.java
+D:\LocalEclipseNeonWorkspace\MakingMySkeleton\P258MySQLSecurity\MakingMySkeleton\P258onLyNumberMySQL\src\main\java\newgroup\security\WebSecurityConfig.java
+D:\LocalEclipseNeonWorkspace\MakingMySkeleton\P258MySQLSecurity\MakingMySkeleton\P258onLyNumberMySQL\src\main\java\newgroup\UserAuthService.java
+D:\LocalEclipseNeonWorkspace\MakingMySkeleton\P258MySQLSecurity\MakingMySkeleton\P258onLyNumberMySQL\src\main\java\newgroup\MySkeletonMain.java
+D:\LocalEclipseNeonWorkspace\MakingMySkeleton\P258MySQLSecurity\MakingMySkeleton\P258onLyNumberMySQL\src\main\java\phoneVaridation\PhoneValidator.java
+D:\LocalEclipseNeonWorkspace\MakingMySkeleton\P258MySQLSecurity\MakingMySkeleton\P258onLyNumberMySQL\src\main\java\newgroup\MySkeletonController.java
+D:\LocalEclipseNeonWorkspace\MakingMySkeleton\P258MySQLSecurity\MakingMySkeleton\P258onLyNumberMySQL\src\main\java\phoneVaridation\Phone.java
+D:\LocalEclipseNeonWorkspace\MakingMySkeleton\P258MySQLSecurity\MakingMySkeleton\P258onLyNumberMySQL\src\main\java\newgroup\entity\MyDataEntity.java

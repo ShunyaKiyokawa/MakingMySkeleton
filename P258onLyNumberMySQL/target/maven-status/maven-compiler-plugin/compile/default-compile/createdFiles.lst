@@ -1,9 +1,12 @@
+newgroup\MySkeletonController.class
 newgroup\repository\MyDataRepository.class
 phoneVaridation\Phone.class
-newgroup\HeloController.class
+newgroup\MySkeletonMain.class
 newgroup\ErrorPages.class
-entity\MyData.class
 newgroup\ErrorPages$ErrorMove.class
+newgroup\security\WebSecurityConfig.class
+newgroup\UserAuthService.class
 newgroup\ErrorPages$1.class
-newgroup\StartP94Application.class
 phoneVaridation\PhoneValidator.class
+newgroup\MySkeletonController$Authority.class
+newgroup\entity\MyDataEntity.class
