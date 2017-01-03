@@ -32,6 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private UserAuthService userAuthService;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+    	//http://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#el-access
         http
             .authorizeRequests()
                 .antMatchers("/nosecurity").permitAll() //URLがマッチしたら誰でも見れる

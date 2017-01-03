@@ -44,6 +44,8 @@
 
 	@RequestMapping(value = "/nosecurity", method = RequestMethod.GET)
 
+	@RequestMapping(value = "/BootStrapOriginal", method = RequestMethod.GET)
+
 	@RequestMapping(value = "/admin/index", method = RequestMethod.GET)
 
 	@RequestMapping(value = "/admin/index", method = RequestMethod.POST)

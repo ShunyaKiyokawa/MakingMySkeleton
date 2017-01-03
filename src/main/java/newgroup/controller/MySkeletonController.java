@@ -288,9 +288,9 @@ public class MySkeletonController {
 		return res;
 	}
 
-	@RequestMapping(value = "/BootStrap2", method = RequestMethod.GET)
-	  public String BootStrap2(Model model) {
-	    return "BootStrap2";
+	@RequestMapping(value = "/BootStrapOriginal", method = RequestMethod.GET)
+	  public String BootStrapOriginal(Model model) {
+	    return "BootStrapOriginal";
 	  }
 
 	@RequestMapping(value = "/nosecurity", method = RequestMethod.GET)

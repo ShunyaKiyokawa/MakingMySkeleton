@@ -3,6 +3,13 @@ package newgroup;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/*
+ * 下記3つをSpringBootApplicationアノテーションでまとめている
+@Configuration
+@EnableAutoConfiguration
+@ComponentScan
+ */
+
 @SpringBootApplication
 public class MySkeletonMain {
 
