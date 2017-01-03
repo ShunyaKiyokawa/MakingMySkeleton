@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
                 .antMatchers("/nosecurity").permitAll() //URLがマッチしたら誰でも見れる
-                .antMatchers("/IPAddress").hasIpAddress("169.254.188.224")//192.168.0/24
+                //.antMatchers("/IPAddress").hasIpAddress("169.254.188.224")//192.168.0/24
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 //.hasRole("USER") // USER 権限のみアクセス可 認可
                 //.permitAll()は全ユーザーアクセス可
